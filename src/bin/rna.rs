@@ -1,10 +1,8 @@
-#![feature(portable_simd)]
-
 use std::{error::Error, fs::File, io::Read, path::PathBuf};
 
 use clap::Parser;
 
-/// Simple program to count base pairs
+/// Simple program to transcribe DNA into RNA
 #[derive(Parser, Debug)]
 struct Args {
     input_file: PathBuf,
