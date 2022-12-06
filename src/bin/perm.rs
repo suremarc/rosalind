@@ -1,5 +1,3 @@
-#![feature(iter_next_chunk)]
-
 use std::error::Error;
 
 use clap::Parser;

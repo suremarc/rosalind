@@ -1,3 +1,5 @@
+#![feature(array_chunks)]
+
 use std::{
     error::Error,
     io::{BufRead, BufReader},
@@ -15,17 +17,8 @@ struct Args {
 fn main() -> Result<(), Box<dyn Error>> {
     let args = Args::parse();
     let reader = BufReader::new(rosalind::reader(args.input_file.as_deref())?);
-    let mut lines = reader.lines();
-    let d1 = lines.next().unwrap()?;
-    let d2 = lines.next().unwrap()?;
+    let rna = reader.lines().next().unwrap()?;
 
-    for i in 0..d1.len() - d2.len() {
-        if d1[i..i + d2.len()] == d2 {
-            print!("{} ", i + 1);
-        }
-    }
-
-    println!();
-
+    println!("{}", rosalind::protein_str(&rna));
     Ok(())
 }
