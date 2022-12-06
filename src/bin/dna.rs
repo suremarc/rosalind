@@ -1,9 +1,9 @@
 #![feature(portable_simd)]
 
-use memmap::MmapOptions;
 use std::{
     error::Error,
     fs::File,
+    io::Read,
     path::PathBuf,
     simd::{u8x64, Simd, SimdPartialEq, ToBitMask},
 };
@@ -18,7 +18,8 @@ struct Args {
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args = Args::parse();
-    let data = unsafe { MmapOptions::new().map(&File::open(args.input_file)?) }?;
+    let mut data = Vec::new();
+    File::open(args.input_file)?.read_to_end(&mut data)?;
 
     let (head, body, tail) = unsafe { data.align_to::<u8x64>() };
 
