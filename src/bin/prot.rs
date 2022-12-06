@@ -1,5 +1,3 @@
-#![feature(array_chunks)]
-
 use std::{
     error::Error,
     io::{BufRead, BufReader},
